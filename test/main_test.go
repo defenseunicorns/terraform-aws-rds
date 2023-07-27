@@ -2,8 +2,8 @@ package e2e_test
 
 import (
 	"context"
-	"os"
 	utils "e2e_test/test/utils"
+	"os"
 	"testing"
 	"time"
 )
