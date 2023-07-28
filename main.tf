@@ -20,11 +20,11 @@ module "db" {
   # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
   # "Error creating DB Instance: InvalidParameterValue: MasterUsername
   # user cannot be used as it is a reserved word used by the engine"
-  db_name                = var.db_name
-  username               = var.username
-  create_random_password = var.create_random_password
-  password               = var.password # If 'create_random_password' is false, then 'password' must be set
-  port                   = 5432
+  db_name                     = var.db_name
+  username                    = var.username
+  manage_master_user_password = var.manage_master_user_password
+  password                    = var.password # If 'manage_master_user_password' is false, then 'password' must be set
+  port                        = 5432
 
   multi_az               = true
   db_subnet_group_name   = var.database_subnet_group_name
