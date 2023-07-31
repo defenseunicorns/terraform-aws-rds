@@ -88,8 +88,8 @@ variable "deletion_protection" {
   default     = false
 }
 
-variable "create_random_password" {
-  description = "Whether to create random password for RDS primary cluster"
+variable "manage_master_user_password" {
+  description = "Set to true to allow RDS to manage the master user password in Secrets Manager"
   type        = bool
   default     = true
 }

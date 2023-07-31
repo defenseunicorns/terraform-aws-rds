@@ -71,8 +71,8 @@ variable "rds_username" {
   default     = "exampleadmin"
 }
 
-variable "rds_create_random_password" {
-  description = "Whether to create random password for RDS primary cluster"
+variable "rds_manage_master_user_password" {
+  description = "Set to true to allow RDS to manage the master user password in Secrets Manager"
   type        = bool
   default     = true
 }

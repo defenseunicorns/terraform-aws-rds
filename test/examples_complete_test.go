@@ -19,11 +19,11 @@ func TestExamplesComplete(t *testing.T) {
 		MaxRetries:         5,
 		TimeBetweenRetries: 5 * time.Second,
 		Vars: map[string]interface{}{
-			"name_prefix":                "ci",
-			"region":                     "us-east-1",
-			"region2":                    "us-east-2",
-			"rds_create_random_password": false,
-			"rds_password":               "my-password",
+			"name_prefix":                     "ci",
+			"region":                          "us-east-1",
+			"region2":                         "us-east-2",
+			"rds_manage_master_user_password": false,
+			"rds_password":                    "my-password",
 			"tags": map[string]string{
 				"ManagedBy": "Terraform",
 				"Repo":      "https://github.com/defenseunicorns/terraform-aws-uds-rds",
