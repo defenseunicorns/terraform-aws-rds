@@ -25,8 +25,8 @@ func TestExamplesComplete(t *testing.T) {
 		TimeBetweenRetries: 5 * time.Second,
 		Vars: map[string]interface{}{
 			"name_prefix":                     "ci",
-			"region":                          "us-east-1",
-			"region2":                         "us-east-2",
+			"region":                          awsRegion,
+			"region2":                         backupAwsRegion,
 			"rds_manage_master_user_password": false,
 			"rds_password":                    "my-password",
 			"tags": map[string]string{
