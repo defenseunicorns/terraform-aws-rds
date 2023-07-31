@@ -1,6 +1,7 @@
 package e2e_test
 
 import (
+	"github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	teststructure "github.com/gruntwork-io/terratest/modules/test-structure"
 	"testing"
@@ -8,6 +9,10 @@ import (
 )
 
 func TestExamplesComplete(t *testing.T) {
+	var approvedRegions = []string{"us-east-1", "us-east-2", "us-west-1", "us-west-2"}
+	awsRegion := aws.GetRandomStableRegion(t, approvedRegions, nil)
+	backupAwsRegion := aws.GetRandomStableRegion(t, approvedRegions, []string{awsRegion})
+
 	t.Parallel()
 	tempFolder := teststructure.CopyTerraformFolderToTemp(t, "..", "examples/complete")
 	terraformOptions := &terraform.Options{
@@ -20,8 +25,8 @@ func TestExamplesComplete(t *testing.T) {
 		TimeBetweenRetries: 5 * time.Second,
 		Vars: map[string]interface{}{
 			"name_prefix":                     "ci",
-			"region":                          "us-east-1",
-			"region2":                         "us-east-2",
+			"region":                          awsRegion,
+			"region2":                         backupAwsRegion,
 			"rds_manage_master_user_password": false,
 			"rds_password":                    "my-password",
 			"tags": map[string]string{

@@ -1,3 +1,7 @@
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 resource "random_id" "default" {
   byte_length = 2
 }
@@ -9,12 +13,13 @@ locals {
 }
 
 module "vpc" {
-  source = "git::https://github.com/defenseunicorns/terraform-aws-uds-vpc.git?ref=v0.0.3"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "5.1.1"
 
   name                  = local.vpc_name
-  vpc_cidr              = "10.200.0.0/16"
+  cidr                  = "10.200.0.0/16"
   secondary_cidr_blocks = ["100.64.0.0/16"] # Used for optimizing IP address usage by pods in an EKS cluster. See https://aws.amazon.com/blogs/containers/optimize-ip-addresses-usage-by-pods-in-your-amazon-eks-cluster/
-  azs                   = ["${var.region}a", "${var.region}b", "${var.region}c"]
+  azs                   = [for az_name in slice(data.aws_availability_zones.available.names, 0, min(length(data.aws_availability_zones.available.names), 3)) : az_name]
   public_subnets        = [for k, v in module.vpc.azs : cidrsubnet(module.vpc.vpc_cidr_block, 5, k)]
   private_subnets       = [for k, v in module.vpc.azs : cidrsubnet(module.vpc.vpc_cidr_block, 5, k + 4)]
   database_subnets      = [for k, v in module.vpc.azs : cidrsubnet(module.vpc.vpc_cidr_block, 5, k + 8)]
