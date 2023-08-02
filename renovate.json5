@@ -69,6 +69,11 @@
       matchDepTypes: ["module"],
       matchDatasources: ["github-tags", "git-tags"],
       versioning: "loose"
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "!/^0/", // exclude any dependencies which are pre-1.0.0 because those can make breaking changes at any time according to the SemVer spec
+      "automerge": true
     }
   ]
 }
