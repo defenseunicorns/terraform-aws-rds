@@ -1,8 +1,8 @@
 adr-tools 3.0.0
-awscli 2.13.8
+awscli 2.13.9
 checkov 2.3.234
 golang 1.21.0
-golangci-lint 1.54.0
+golangci-lint 1.54.1
 pre-commit 3.3.3
 terraform 1.5.5
 terraform-docs 0.16.0
