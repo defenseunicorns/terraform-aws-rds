@@ -31,7 +31,7 @@ func TestExamplesComplete(t *testing.T) {
 			"rds_password":                    "my-password",
 			"tags": map[string]string{
 				"ManagedBy": "Terraform",
-				"Repo":      "https://github.com/defenseunicorns/terraform-aws-uds-rds",
+				"Repo":      "https://github.com/defenseunicorns/terraform-aws-rds",
 			},
 		},
 	}
