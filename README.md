@@ -4,7 +4,7 @@ This repository contains Terraform configuration files that create a RDS (Relati
 
 ## Examples
 
-To view examples for how you can leverage this RDS Module, please see the [examples](https://github.com/defenseunicorns/terraform-aws-uds-rds/tree/main/examples) directory.
+To view examples for how you can leverage this RDS Module, please see the [examples](https://github.com/defenseunicorns/terraform-aws-rds/tree/main/examples) directory.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
