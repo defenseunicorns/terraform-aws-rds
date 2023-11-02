@@ -79,7 +79,7 @@ No outputs.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_rds"></a> [rds](#module\_rds) | ../.. | n/a |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | 5.1.1 |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | 5.1.2 |
 
 ## Resources
 
