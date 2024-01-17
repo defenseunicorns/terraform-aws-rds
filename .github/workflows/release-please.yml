@@ -1,5 +1,7 @@
+# On every push to main, run release-please to automatically handle the release process.
 
-name: Release Please Merge
+name: release-please
+
 on:
   push:
     branches:
@@ -8,13 +10,10 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  packages: write
-  repository-projects: read
-  
-jobs:
-  release-terraform:
-    uses: defenseunicorns/uds-common-workflows/.github/workflows/release-terraform.yml@main
-    with:
-      command: manifest
-      release-type: simple
 
+jobs:
+  release-please:
+    uses: defenseunicorns/delivery-github-actions-workflows/.github/workflows/release-please.yml@main
+    secrets:
+      APPLICATION_ID: ${{ secrets.NARWHAL_BOT_APP_ID }}
+      APPLICATION_PRIVATE_KEY: ${{ secrets.NARWHAL_BOT_SECRET }}
