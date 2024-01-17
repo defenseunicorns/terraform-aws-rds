@@ -93,3 +93,18 @@ output "db_instance_cloudwatch_log_groups" {
   description = "Map of CloudWatch log groups created and their attributes"
   value       = module.db.db_instance_cloudwatch_log_groups
 }
+
+output "vpc_cidr_block" {
+  description = "The CIDR block of the VPC"
+  value       = var.vpc_cidr
+}
+
+output "vpc_id" {
+  description = "The ID of the VPC."
+  value       = var.vpc_id
+}
+
+output "database_subnet_group_name" {
+  description = "Name of database subnet group"
+  value       = var.database_subnet_group_name
+}

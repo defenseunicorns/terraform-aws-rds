@@ -5,7 +5,6 @@ terraform {
     aws = {
       source                = "hashicorp/aws"
       version               = ">= 4.45"
-      configuration_aliases = [aws.region2]
     }
 
     random = {
