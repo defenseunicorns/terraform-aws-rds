@@ -1,4 +1,4 @@
-
+<!-- END_TF_DOCS -->
 # examples/complete
 
 Example that uses the module with many of its configurations. Used in CI E2E tests.
@@ -79,7 +79,7 @@ No outputs.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_rds"></a> [rds](#module\_rds) | ../.. | n/a |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | 5.1.1 |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | git::https://github.com/defenseunicorns/terraform-aws-vpc.git | v0.1.5 |
 
 ## Resources
 
@@ -107,10 +107,10 @@ No outputs.
 | <a name="input_rds_password"></a> [rds\_password](#input\_rds\_password) | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file.<br>  The password provided will not be used if the variable create\_random\_password is set to true. | `string` | `null` | no |
 | <a name="input_rds_username"></a> [rds\_username](#input\_rds\_username) | Username for the master DB user. | `string` | `"exampleadmin"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region to deploy into | `string` | n/a | yes |
-| <a name="input_region2"></a> [region2](#input\_region2) | Region to use for RDS backup replication is a separate region | `string` | n/a | yes |
+| <a name="input_secondary_cidr_blocks"></a> [secondary\_cidr\_blocks](#input\_secondary\_cidr\_blocks) | Secondary CIDR block to use for the VPC | `list(string)` | <pre>[<br>  "100.64.0.0/16"<br>]</pre> | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to apply to all resources | `map(string)` | `{}` | no |
+| <a name="input_vpc_cidr"></a> [vpc\_cidr](#input\_vpc\_cidr) | The CIDR block of the VPC | `string` | `"10.200.0.0/16"` | no |
 
 ## Outputs
 
 No outputs.
-<!-- END_TF_DOCS -->

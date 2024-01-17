@@ -8,18 +8,25 @@ resource "random_id" "default" {
 
 locals {
   # Add randomness to names to avoid collisions when multiple users are using this example
-  vpc_name       = "${var.name_prefix}-${lower(random_id.default.hex)}"
+  vpc_name = "${var.name_prefix}-${lower(random_id.default.hex)}"
+  tags = merge(
+    var.tags,
+    {
+      RootTFModule = replace(basename(path.cwd), "_", "-") # tag names based on the directory name
+      ManagedBy    = "Terraform"
+      Repo         = "https://github.com/defenseunicorns/terraform-aws-vpc"
+    }
+  )
   rds_identifier = "${var.name_prefix}-${lower(random_id.default.hex)}"
 }
 
 module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "5.1.1"
+  source = "git::https://github.com/defenseunicorns/terraform-aws-vpc.git?ref=v0.1.5"
 
   name                  = local.vpc_name
-  cidr                  = "10.200.0.0/16"
-  secondary_cidr_blocks = ["100.64.0.0/16"] # Used for optimizing IP address usage by pods in an EKS cluster. See https://aws.amazon.com/blogs/containers/optimize-ip-addresses-usage-by-pods-in-your-amazon-eks-cluster/
-  azs                   = [for az_name in slice(data.aws_availability_zones.available.names, 0, min(length(data.aws_availability_zones.available.names), 3)) : az_name]
+  vpc_cidr              = var.vpc_cidr
+  secondary_cidr_blocks = var.secondary_cidr_blocks # Used for optimizing IP address usage by pods in an EKS cluster. See https://aws.amazon.com/blogs/containers/optimize-ip-addresses-usage-by-pods-in-your-amazon-eks-cluster/
+  azs                   = ["${var.region}a", "${var.region}b", "${var.region}c"]
   public_subnets        = [for k, v in module.vpc.azs : cidrsubnet(module.vpc.vpc_cidr_block, 5, k)]
   private_subnets       = [for k, v in module.vpc.azs : cidrsubnet(module.vpc.vpc_cidr_block, 5, k + 4)]
   database_subnets      = [for k, v in module.vpc.azs : cidrsubnet(module.vpc.vpc_cidr_block, 5, k + 8)]
@@ -43,17 +50,13 @@ module "vpc" {
   }
   create_database_subnet_group      = true
   instance_tenancy                  = "default"
+  create_default_vpc_endpoints      = true
   vpc_flow_log_permissions_boundary = var.iam_role_permissions_boundary
-  tags                              = var.tags
+  tags                              = local.tags
 }
 
 module "rds" {
   source = "../.."
-
-  # provider alias is needed for every parent module supporting RDS backup replication is a separate region
-  providers = {
-    aws.region2 = aws.region2
-  }
 
   vpc_id                               = module.vpc.vpc_id
   vpc_cidr                             = module.vpc.vpc_cidr_block
@@ -72,5 +75,5 @@ module "rds" {
   max_allocated_storage                = var.rds_max_allocated_storage
   deletion_protection                  = var.rds_deletion_protection
   monitoring_role_permissions_boundary = var.iam_role_permissions_boundary
-  tags                                 = var.tags
+  tags                                 = local.tags
 }

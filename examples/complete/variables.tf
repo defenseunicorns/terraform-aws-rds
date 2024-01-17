@@ -12,15 +12,22 @@ variable "region" {
   type        = string
 }
 
-variable "region2" {
-  description = "Region to use for RDS backup replication is a separate region"
-  type        = string
-}
-
 variable "tags" {
   description = "A map of tags to apply to all resources"
   type        = map(string)
   default     = {}
+}
+
+variable "vpc_cidr" {
+  description = "The CIDR block of the VPC"
+  type        = string
+  default     = "10.200.0.0/16"
+}
+
+variable "secondary_cidr_blocks" {
+  description = "Secondary CIDR block to use for the VPC"
+  type        = list(string)
+  default     = ["100.64.0.0/16"]
 }
 
 variable "iam_role_permissions_boundary" {
