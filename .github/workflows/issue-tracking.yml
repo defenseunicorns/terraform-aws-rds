@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Add issue to Project
-        uses: defenseunicorns/delivery-github-actions-workflows/.github/actions/issue_tracking@add_issue_tracking
+        uses: defenseunicorns/delivery-github-actions-workflows/.github/actions/issue_tracking@add-issue-tracking
         with:
             application_id: ${{ secrets.APPLICATION_ID }}
             application_private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
