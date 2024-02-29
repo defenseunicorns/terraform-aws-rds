@@ -1,0 +1,21 @@
+name: issue-tracking
+
+on:
+    issues:
+      types:
+        - opened
+    workflow_dispatch:
+    pull_request:
+
+jobs:
+  add-to-project:
+    name: Add issue to project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add issue to Project
+        uses: defenseunicorns/delivery-github-actions-workflows/.github/actions/issue-tracking@add-issue-tracking
+        with:
+            application_id: ${{ secrets.NARWHAL_BOT_APP_ID }}
+            application_private_key: ${{ secrets.NARWHAL_BOT_SECRET }}
+            token: ${{ secrets.TOKEN }}
+            project_url: https://github.com/orgs/defenseunicorns/projects/31
