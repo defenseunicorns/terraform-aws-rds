@@ -1,0 +1,19 @@
+name: Add issue to project
+
+on:
+    issues:
+      types:
+        - opened
+
+jobs:
+  add-to-project:
+    name: Add issue to project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add issue to Project
+        uses: defenseunicorns/delivery-github-actions-workflows/.github/actions/issue_tracking@add_issue_tracking
+        with:
+            application_id: ${{ secrets.APPLICATION_ID }}
+            application_private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
+            token: ${{ secrets.TOKEN }}
+            project_url: https://github.com/orgs/defenseunicorns/projects/31
