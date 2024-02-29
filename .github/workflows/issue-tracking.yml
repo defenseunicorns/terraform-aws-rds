@@ -1,4 +1,4 @@
-name: Add issue to project
+name: issue-tracking
 
 on:
     issues:
