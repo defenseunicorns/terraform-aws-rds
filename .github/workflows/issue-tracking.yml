@@ -15,7 +15,7 @@ jobs:
       - name: Add issue to Project
         uses: defenseunicorns/delivery-github-actions-workflows/.github/actions/issue-tracking@add-issue-tracking
         with:
-            application_id: ${{ secrets.APPLICATION_ID }}
-            application_private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
+            application_id: ${{ secrets.NARWHAL_BOT_APP_ID }}
+            application_private_key: ${{ secrets.NARWHAL_BOT_SECRET }}
             token: ${{ secrets.TOKEN }}
             project_url: https://github.com/orgs/defenseunicorns/projects/31
