@@ -126,6 +126,14 @@ module "security_group" {
       description = "PostgreSQL access from within VPC"
       cidr_blocks = var.vpc_cidr
     },
+    # Create ingress rules for secondary CIDR blocks if provided
+    for cidr_block in var.secondary_cidr_blocks : {
+      from_port   = 5432
+      to_port     = 5432
+      protocol    = "tcp"
+      description = "PostgreSQL access from secondary CIDR block"
+      cidr_blocks = var.secondary_cidr_blocks
+    }
   ]
 
   tags = var.tags

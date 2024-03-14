@@ -4,6 +4,13 @@ variable "vpc_cidr" {
   default     = ""
 }
 
+variable "secondary_cidr_blocks" {
+  description = "A list of secondary CIDR blocks to associate with the security group."
+  type        = string
+  default     = ""
+  
+}
+
 variable "vpc_id" {
   description = "The ID of the VPC."
   type        = string
