@@ -8,7 +8,7 @@ variable "vpc_cidr" {
 #   description = "A list of secondary CIDR blocks to associate with the security group."
 #   type        = string
 #   default     = ""
-  
+
 # }
 
 variable "vpc_id" {
