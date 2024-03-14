@@ -1,7 +1,7 @@
 variable "vpc_cidr" {
   description = "The CIDR block for the VPC."
-  type        = list(string)
-  default     = []
+  type        = string
+  default     = ""
 }
 
 # variable "secondary_cidr_blocks" {
